@@ -1,17 +1,19 @@
-package com.faisalridwan.recyclerviewadapter;
+package com.faisalridwan.recyclerviewadapter.main;
 
-import android.text.Layout;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.faisalridwan.recyclerviewadapter.R;
+import com.faisalridwan.recyclerviewadapter.data.Hotel;
+import com.faisalridwan.recyclerviewadapter.detail.DetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,18 +45,22 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder>{
         private TextView tvIsi;
         private TextView tvHarga;
         private TextView tvRating;
+        private ImageView ivMasuk;
+        private ImageView ivBack;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivImg =itemView.findViewById(R.id.iv_img);
+            ivImg = itemView.findViewById(R.id.iv_img);
             tvJudulHead = itemView.findViewById(R.id.tv_judulHead);
             tvNamaJalan = itemView.findViewById(R.id.tv_namaJalan);
             tvIsi = itemView.findViewById(R.id.tv_isi);
             tvHarga = itemView.findViewById(R.id.tv_harga);
             tvRating = itemView.findViewById(R.id.tv_rating);
+            ivMasuk = itemView.findViewById(R.id.iv_masuk);
+            ivBack = itemView.findViewById(R.id.iv_back);
         }
-        public  void bindDataToView(Hotel hotel){
+        public  void bindDataToView(final Hotel hotel){
 //            team.setCoachNum(1);
 //            team.setPlayerNum(20);
             Glide.with(itemView.getContext()).load(hotel.getHotelImg()).into(ivImg);
@@ -63,6 +69,18 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder>{
 //            tvIsi.setText(hotel.ge());
             tvHarga.setText((String.valueOf(hotel.getHotelPrice())));
             tvRating.setText((String.valueOf(hotel.getHotelRate())));
+
+            ivMasuk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+                    intent.putExtra("EXTRA_DATA", hotel);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
+
+
+
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.faisalridwan.recyclerviewadapter;
+package com.faisalridwan.recyclerviewadapter.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.faisalridwan.recyclerviewadapter.R;
+import com.faisalridwan.recyclerviewadapter.data.Hotel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

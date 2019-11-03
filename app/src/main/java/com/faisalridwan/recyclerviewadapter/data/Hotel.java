@@ -1,8 +1,11 @@
-package com.faisalridwan.recyclerviewadapter;
+package com.faisalridwan.recyclerviewadapter.data;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Hotel{
+public class Hotel implements Parcelable {
 	@SerializedName("hotel_rate")
 	private String hotelRate;
 	@SerializedName("hotel_img")
@@ -13,6 +16,26 @@ public class Hotel{
 	private String hotelName;
 	@SerializedName("hotel_loc")
 	private String hotelLoc;
+
+	protected Hotel(Parcel in) {
+		hotelRate = in.readString();
+		hotelImg = in.readString();
+		hotelPrice = in.readString();
+		hotelName = in.readString();
+		hotelLoc = in.readString();
+	}
+
+	public static final Creator<Hotel> CREATOR = new Creator<Hotel>() {
+		@Override
+		public Hotel createFromParcel(Parcel in) {
+			return new Hotel(in);
+		}
+
+		@Override
+		public Hotel[] newArray(int size) {
+			return new Hotel[size];
+		}
+	};
 
 	public void setHotelRate(String hotelRate){
 		this.hotelRate = hotelRate;
@@ -65,4 +88,18 @@ public class Hotel{
 			",hotel_loc = '" + hotelLoc + '\'' + 
 			"}";
 		}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel parcel, int i) {
+		parcel.writeString(hotelRate);
+		parcel.writeString(hotelImg);
+		parcel.writeString(hotelPrice);
+		parcel.writeString(hotelName);
+		parcel.writeString(hotelLoc);
+	}
 }
